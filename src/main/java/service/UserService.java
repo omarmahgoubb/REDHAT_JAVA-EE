@@ -72,6 +72,8 @@ public class UserService {
                  // Update profile information
                  existingUser.setEmail(updatedUser.getEmail());
                  existingUser.setPassword(updatedUser.getPassword());
+                 existingUser.setName(updatedUser.getName());
+                 
 
                  entityManager.merge(existingUser);
                  return "User profile updated successfully";
