@@ -82,6 +82,39 @@ public class UserService {
              e.printStackTrace(); // This is for demonstration, you may want to log it properly
              return "An error occurred while updating user profile";
          }
-        // Business logic for updating user profile...
     }
-}
+    
+    
+    public String loginUser(User loggedUser)
+    {
+        String email = loggedUser.getEmail();
+        String password = loggedUser.getPassword();
+        
+        try {
+            // Query the database to find the user with the given email
+            TypedQuery<User> query = 
+            		entityManager.createQuery("SELECT u FROM User u "
+            				+ "WHERE u.email = :email", User.class);
+            query.setParameter("email", email);
+            List<User> users = query.getResultList();
+            
+            if (users.isEmpty()) {
+                return "Email is wrong";
+            }
+            
+            User user = users.get(0);
+            
+            // Here, we are checking the password directly from the database, which is not recommended
+            if (!user.getPassword().equals(password)) {
+                return "Password is wrong";
+            }
+            
+            return "User logged in successfully";
+        } catch (Exception e) {
+            // Log the exception or handle it accordingly
+            e.printStackTrace(); // This is for demonstration, you may want to log it properly
+            return "An error occurred while logging in";
+        }
+    }
+
+    }

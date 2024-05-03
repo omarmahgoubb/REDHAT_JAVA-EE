@@ -34,4 +34,11 @@ public class UserController {
     public String updateUserProfile(User updatedUser) {
         return userService.updateUserProfile(updatedUser);
     }
+    
+    @POST
+    @Path("login")
+    public String login (User loggedUser)
+    {
+    	return userService.loginUser(loggedUser);
+    }
 }
