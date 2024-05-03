@@ -40,13 +40,33 @@ public class UserController {
     	
  	    	String email=user.getEmail();
  	    	String password=user.getPassword();
+ 	    	String name=user.getName();
  	    	
  	    	user.setEmail(email);
  	    	user.setPassword(password);
     	
     	try {
-            entityManager.persist(user);
+    		if (email == null || email.isEmpty())
+    		{
+                return "Email cannot be null or empty";
+            }
+    		if (password == null || password.isEmpty())
+    		{
+                return "Password cannot be null or empty";
+            }
+    		
+    		TypedQuery<Long> query =
+    				entityManager.createQuery
+    		("SELECT COUNT(u) FROM User u WHERE u.email = "
+    				+ ":email", Long.class);
+    		query.setParameter("email", email);
+    		Long count = query.getSingleResult();
 
+    		if (count > 0) {
+    		    return "Email already found";
+    		}
+
+    		entityManager.persist(user);
             return "User registered successfully";
             }
     	catch (Exception e) 
