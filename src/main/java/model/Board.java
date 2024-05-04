@@ -14,23 +14,20 @@ public class Board {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	int Board_id;
 	String boardname;
-	//User owner;
-	//ArrayList <Users> collaboratos;
-
-	ArrayList <List> cardlist;
+	 //ArrayList <cardlist> cardlist;
 	public Board( String boardname) {
 
 		this.boardname = boardname;
 
-		this.cardlist = cardlist;
+	//	this.cardlist = cardlist;
 	}
 	
-	public ArrayList<List> getCardlist() {
-		return cardlist;
-	}
-	public void setCardlist(ArrayList<List> cardlist) {
-		this.cardlist = cardlist;
-	}
+//	public ArrayList<cardlist> getCardlist() {
+//		return cardlist;
+//	}
+//	public void setCardlist(ArrayList<cardlist> cardlist) {
+//		this.cardlist = cardlist;
+//	}
 	public Board() {
 		
 	}
