@@ -13,14 +13,14 @@ public class Board {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	int Board_id;
-	String nameofBoard;
+	String boardname;
 	 //ArrayList <cardlist> cardlist;
-	public Board(int Board_id, String nameofBoard, ArrayList<model.cardlist> cardlist) {
-		super();
-		this.Board_id = Board_id;
-		this.nameofBoard = nameofBoard;
+	public Board( String boardname) {
+
+		this.boardname = boardname;
 	//	this.cardlist = cardlist;
 	}
+	
 //	public ArrayList<cardlist> getCardlist() {
 //		return cardlist;
 //	}
@@ -36,11 +36,11 @@ public class Board {
 	public void setBoard_id(int Board_id) {
 		this.Board_id = Board_id;
 	}
-	public String getnameofBoard() {
-		return nameofBoard;
+	public String getboardname() {
+		return boardname;
 	}
-	public void setnameofBoard(String nameofBoard) {
-		this.nameofBoard = nameofBoard;
+	public void setboardname(String boardname) {
+		this.boardname = boardname;
 	}
 	
 }

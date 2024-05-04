@@ -7,7 +7,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
 
 @Stateful
 @Path("boards")

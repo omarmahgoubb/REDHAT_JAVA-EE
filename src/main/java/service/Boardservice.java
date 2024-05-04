@@ -6,38 +6,41 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-
 import java.util.ArrayList;
 import java.util.List;
-@Stateful
 
+@Stateful
 public class Boardservice {
    @PersistenceContext(unitName="hello")
     private EntityManager entitymanger;
+   
     public String createBoard(Board board) {
     	
-    	String name=board.getnameofBoard();
-    	int id=board.getBoard_id();
-    	//ArrayList <cardlist> cardlist=board.getCardlist();
+    	String boardname=board.getboardname();
+    	//ArrayList <cardlist> cardlist=board.getCardlist()	;
+    	//toadd list of listsssssssss 
     	
-    	
-    	board.setBoard_id(id);
-    	board.setnameofBoard(name);
+    	board.setboardname(boardname);
     	//board.setCardlist(cardlist);
     	
     	try {
-    		if (name ==null || name.isEmpty()) {
-    			return "name cannot be empty";
+    		if (boardname ==null || boardname.isEmpty()) {
+                return "name cannot be null or empty";
     		}
-    		TypedQuery<Long> query = entitymanger.createQuery
-    		("SELECT COUNT(u) FROM Board u WHERE u.name = " 
-    				+ ":name",Long.class);
-    		query.setParameter("name", name);
+    		
+    		TypedQuery<Long> query = entitymanger.createQuery(
+    			    "SELECT COUNT(n) FROM Board n WHERE n.boardname = :boardname", Long.class);
+    			query.setParameter("boardname", boardname);
+
+    		
+    		query.setParameter("boardname", boardname);
+    		
     		long count=query.getSingleResult();
     		
     		if(count>0) {
     			return "this name is already used";
     		}
+    		
     		entitymanger.persist(board);
     		return "board created successfully";
     			
