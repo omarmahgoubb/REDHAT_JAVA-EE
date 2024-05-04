@@ -17,7 +17,7 @@ public class Board {
 	//User owner;
 	//ArrayList <Users> collaboratos;
 
-	ArrayList <cardlist> cardlist;
+	ArrayList <List> cardlist;
 	public Board( String boardname) {
 
 		this.boardname = boardname;
@@ -25,10 +25,10 @@ public class Board {
 		this.cardlist = cardlist;
 	}
 	
-	public ArrayList<cardlist> getCardlist() {
+	public ArrayList<List> getCardlist() {
 		return cardlist;
 	}
-	public void setCardlist(ArrayList<cardlist> cardlist) {
+	public void setCardlist(ArrayList<List> cardlist) {
 		this.cardlist = cardlist;
 	}
 	public Board() {
