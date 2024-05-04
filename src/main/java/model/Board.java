@@ -10,7 +10,6 @@ import java.util.ArrayList;
 @Stateful
 @Entity
 public class Board {
-	//test
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	int Board_id;
@@ -19,6 +18,7 @@ public class Board {
 	public Board( String boardname) {
 
 		this.boardname = boardname;
+
 	//	this.cardlist = cardlist;
 	}
 	
@@ -43,5 +43,6 @@ public class Board {
 	public void setboardname(String boardname) {
 		this.boardname = boardname;
 	}
+	
 	
 }
