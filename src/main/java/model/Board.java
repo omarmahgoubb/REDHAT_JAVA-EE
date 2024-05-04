@@ -14,7 +14,7 @@ public class Board {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	int Board_id;
 	String boardname;
-	 ArrayList <cardlist> cardlist;
+	ArrayList <cardlist> cardlist;
 	public Board( String boardname) {
 
 		this.boardname = boardname;
