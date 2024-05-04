@@ -18,7 +18,7 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 
-public class boardcontroller {
+public class BoardController {
 	@EJB
     private Boardservice boardservice;
 	@POST

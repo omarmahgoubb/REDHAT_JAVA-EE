@@ -1,8 +1,8 @@
 package service;
 import model.Board;
 import model.User;
-import model.card;
-import controller.boardcontroller;
+import model.Card;
+import controller.BoardController;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
