@@ -10,6 +10,7 @@ import java.util.ArrayList;
 @Stateful
 @Entity
 public class Board {
+	//test
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	int Board_id;
