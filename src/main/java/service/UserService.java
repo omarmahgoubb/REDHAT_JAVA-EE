@@ -6,6 +6,8 @@ import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.validation.constraints.Size;
+
 import java.util.List;
 
 @Stateful
@@ -31,6 +33,11 @@ public class UserService {
 		{
             return "Password cannot be null or empty";
         }
+		if(countDigits(password)<8)
+		{
+			return "password must be more than 8 characters";
+		}
+		
 		
 		TypedQuery<Long> query = entityManager.createQuery
 		("SELECT COUNT(u) FROM User u WHERE u.email = "
@@ -53,6 +60,22 @@ public class UserService {
     }
         // Business logic for user registration...
     }
+   
+    
+    public static int countDigits(String str)
+    {
+    	 int count = 0;
+         for (char c : str.toCharArray()) {
+             if (Character.isDigit(c)) {
+                 count++;
+             }
+         }
+         return count;
+     }
+    	
+    
+    
+    
 
     public List<User> getUsers()
     {
@@ -71,6 +94,15 @@ public class UserService {
             
                  // Update profile information
                  existingUser.setEmail(updatedUser.getEmail());
+                 if (updatedUser.getPassword() == null || updatedUser.getPassword().isEmpty())
+         		{
+                     return "Password cannot be null or empty";
+                 }
+         		if(countDigits(updatedUser.getPassword())<8)
+         		{
+         			return "password must be more than 8 characters";
+         		}
+                 
                  existingUser.setPassword(updatedUser.getPassword());
                  existingUser.setName(updatedUser.getName());
                  
