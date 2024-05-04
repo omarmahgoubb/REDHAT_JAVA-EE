@@ -14,20 +14,20 @@ public class Board {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	int Board_id;
 	String boardname;
-	 //ArrayList <cardlist> cardlist;
+	 ArrayList <cardlist> cardlist;
 	public Board( String boardname) {
 
 		this.boardname = boardname;
 
-	//	this.cardlist = cardlist;
+		this.cardlist = cardlist;
 	}
 	
-//	public ArrayList<cardlist> getCardlist() {
-//		return cardlist;
-//	}
-//	public void setCardlist(ArrayList<cardlist> cardlist) {
-//		this.cardlist = cardlist;
-//	}
+	public ArrayList<cardlist> getCardlist() {
+		return cardlist;
+	}
+	public void setCardlist(ArrayList<cardlist> cardlist) {
+		this.cardlist = cardlist;
+	}
 	public Board() {
 		
 	}
