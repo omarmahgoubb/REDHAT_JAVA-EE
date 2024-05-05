@@ -23,27 +23,22 @@ public class BoardController {
     private Boardservice boardservice;
 	@POST
 	@Path("create")
-	public String createboard(Board board) {
-		return boardservice.createBoard(board); 
+	public String createboard(Board board, @QueryParam("username") String username) {
+		return boardservice.createBoard(board,username); 
 	}
 	@GET
 	@Path("get_boards")
-	public List<Board> getboards(){
-		return boardservice.getboards();
-	}
-	  @DELETE
-	    @Path("/{boardId}")
-	    public Response deleteBoard(@PathParam("boardId") int boardId) {
-	        Board boardToDelete = new Board();
-	        boardToDelete.setBoard_id(boardId);
+	public List<Board> getboards(@QueryParam("username") String username) {
+		    return boardservice.getboards(username);
+		}	
+		@DELETE
+	    @Path("deleteboard}")
+	    public String deleteBoard(@QueryParam("boardname") String boardname, @QueryParam("username") String username) {
 
-	        String result = boardservice.deleteboard(boardToDelete);
+	        return boardservice.deleteboard(boardname, username);
+	       
 
-	        if (result.equals("Board deleted successfully")) {
-	            return Response.status(Response.Status.OK).entity(result).build();
-	        } else {
-	            return Response.status(Response.Status.NOT_FOUND).entity(result).build();
-	        }
+	        
 	    }
 	
 

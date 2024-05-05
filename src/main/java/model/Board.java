@@ -24,7 +24,19 @@ public class Board {
     @JoinColumn(name = "owner_id")
     private User owner;	
     
-    @ManyToMany(mappedBy = "collaboratorBoards")
+    public User getOwner() {
+		return owner;
+	}
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
+	public List<User> getCollaborators() {
+		return collaborators;
+	}
+	public void setCollaborators(List<User> collaborators) {
+		this.collaborators = collaborators;
+	}
+	@ManyToMany(mappedBy = "collaboratorBoards")
     private List<User> collaborators = new ArrayList<>();
 	public Board( String boardname) {
 

@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class Listt
+public class AymanTestModel
 {
 
 	String type;
@@ -24,11 +24,11 @@ public class Listt
 	{
 		this.cards = cards;
 	}
-	public Listt(String type, ArrayList<Card> cards) 
+	public AymanTestModel(String type, ArrayList<Card> cards) 
 	{
 		this.type = type;
 		this.cards = cards;
 	}
-	public Listt() 
+	public AymanTestModel() 
 	{}
 }
