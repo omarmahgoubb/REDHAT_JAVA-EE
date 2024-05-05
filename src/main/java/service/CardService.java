@@ -170,7 +170,7 @@ public class CardService {
             }
 
             Card card = cards.get(0);
-
+            //togit
             // Find the user by their username
             TypedQuery<User> userQuery = entityManager.createQuery(
                     "SELECT u FROM User u WHERE u.username = :username", User.class);
