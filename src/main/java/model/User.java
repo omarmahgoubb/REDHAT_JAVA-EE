@@ -1,27 +1,33 @@
 package model;
 
-import javax.ejb.Stateful;
-import javax.ejb.Stateless;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Min;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-@Stateful
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-public class User 
-{
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	int id;
-	@NotNull
-	String email;
-	@NotNull
-	String password;
-	String name;
-	String role;
-	
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @NotNull
+    private String email;
+    private String username;
+    @NotNull
+    private String password;
+    private String name;
+    private String role;
+
+    @ManyToMany
+    private List<Board> collaboratorBoards = new ArrayList<>();
+
 	
 	public int getId() 
 	{
@@ -31,6 +37,14 @@ public class User
 	public void setId(int id)
 	{
 		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 

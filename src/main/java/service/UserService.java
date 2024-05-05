@@ -18,11 +18,15 @@ public class UserService {
     public String registerUser(User user)
     {
     	    String email=user.getEmail();
+    	    String username=user.getUsername();
 	    	String password=user.getPassword();
 	    	String name=user.getName();
+	    	String role=user.getRole();
 	    	
 	    	user.setEmail(email);
 	    	user.setPassword(password);
+	    	user.setUsername(username);
+	    	user.setRole(role);
 	
 	try {
 		if (email == null || email.isEmpty())
@@ -37,7 +41,11 @@ public class UserService {
 		{
 			return "password must be more than 8 characters";
 		}
-		
+		if (username == null || username.isEmpty())
+		{
+            return "Username cannot be null or empty";
+        }
+
 		
 		TypedQuery<Long> query = entityManager.createQuery
 		("SELECT COUNT(u) FROM User u WHERE u.email = "
@@ -45,12 +53,25 @@ public class UserService {
 		query.setParameter("email", email);
 		Long count = query.getSingleResult();
 
-		if (count > 0) {
+		if (count > 0) 
+		{
 		    return "Email already found";
 		}
+		
+		
+		TypedQuery<Long> query2 = entityManager.createQuery
+				("SELECT COUNT(u) FROM User u WHERE u.username = "
+				+ ":username", Long.class);
+				query2.setParameter("username", username); // Corrected line
+				Long count2 = query2.getSingleResult(); // Corrected line
 
+				if (count2 > 0)
+				{
+				    return "username already found";
+				}
 		entityManager.persist(user);
         return "User registered successfully";
+        
         }
 	catch (Exception e) 
 	{
@@ -65,90 +86,112 @@ public class UserService {
     public static int countDigits(String str)
     {
     	 int count = 0;
-         for (char c : str.toCharArray()) {
-             if (Character.isDigit(c)) {
+         for (char c : str.toCharArray())
+         {
+             if (Character.isDigit(c)) 
+             {
                  count++;
              }
          }
          return count;
      }
-    	
     
-    
-    
-
     public List<User> getUsers()
     {
-    	TypedQuery<User> query =entityManager.createQuery("SELECT c from User c", User.class);
+    	TypedQuery<User> query =entityManager.createQuery
+    			("SELECT c from User c", User.class);
 		List <User> users= query.getResultList();
 		
 		return users;
         // Business logic for fetching users...
     }
-
-    public String updateUserProfile(User updatedUser) 
+    public String updateUserProfile(User updatedUser)
     {
-    	 try {
-             User existingUser = entityManager.find(User.class, updatedUser.getId());
-             
+        try {
+            // Query to find the user by username
+            TypedQuery<User> query = entityManager.createQuery(
+                "SELECT u FROM User u WHERE u.username = :username",
+                User.class);
+            query.setParameter("username", updatedUser.getUsername());
             
-                 // Update profile information
-                 existingUser.setEmail(updatedUser.getEmail());
-                 if (updatedUser.getPassword() == null || updatedUser.getPassword().isEmpty())
-         		{
-                     return "Password cannot be null or empty";
-                 }
-         		if(countDigits(updatedUser.getPassword())<8)
-         		{
-         			return "password must be more than 8 characters";
-         		}
-                 
-                 existingUser.setPassword(updatedUser.getPassword());
-                 existingUser.setName(updatedUser.getName());
-                 
+            // Execute the query
+            List<User> resultList = query.getResultList();
+            
+            // Check if the user exists
+            if (resultList.isEmpty())
+            {
+                return "User not found";
+            }
+            
+            // Assuming username is unique, there should be only one result
+            User existingUser = resultList.get(0);
 
-                 entityManager.merge(existingUser);
-                 return "User profile updated successfully";
-         
-             
-         } catch (Exception e) {
-             // Log the exception or handle it accordingly
-             e.printStackTrace(); // This is for demonstration, you may want to log it properly
-             return "An error occurred while updating user profile";
-         }
+            // Update profile information
+            if (updatedUser.getEmail() == null ||
+            		updatedUser.getEmail().isEmpty()) 
+            {
+                return "Email cannot be null or empty";
+            }
+            existingUser.setEmail(updatedUser.getEmail());
+            
+            if (updatedUser.getPassword() == null ||
+            		updatedUser.getPassword().isEmpty()) {
+                return "Password cannot be null or empty";
+            }
+            if (countDigits(updatedUser.getPassword()) < 8) 
+            {
+                return "Password must be more than 8 characters";
+            }
+            existingUser.setPassword(updatedUser.getPassword());
+            
+            existingUser.setName(updatedUser.getName());
+            
+            existingUser.setRole(updatedUser.getRole());
+            
+            entityManager.merge(existingUser);
+            return "User profile updated successfully";
+
+        } catch (Exception e)
+        {
+            // Log the exception or handle it accordingly
+            e.printStackTrace(); // This is for demonstration, you may want to log it properly
+            return "An error occurred while updating user profile";
+        }
     }
-    
+
     
     public String loginUser(User loggedUser)
     {
         String email = loggedUser.getEmail();
+        String username = loggedUser.getUsername();
         String password = loggedUser.getPassword();
         
         try {
             // Query the database to find the user with the given email
             TypedQuery<User> query = 
             		entityManager.createQuery("SELECT u FROM User u "
-            				+ "WHERE u.email = :email", User.class);
-            query.setParameter("email", email);
+            				+ "WHERE u.username = :username", User.class);
+            query.setParameter("username", username);
             List<User> users = query.getResultList();
             
             if (users.isEmpty()) {
-                return "Email is wrong";
+                return "username is wrong";
             }
             
             User user = users.get(0);
             
             // Here, we are checking the password directly from the database, which is not recommended
-            if (!user.getPassword().equals(password)) {
+            if (!user.getPassword().equals(password))
+            {
                 return "Password is wrong";
             }
             
             return "User logged in successfully";
-        } catch (Exception e) {
+        	} catch (Exception e) 
+        	{
             // Log the exception or handle it accordingly
             e.printStackTrace(); // This is for demonstration, you may want to log it properly
             return "An error occurred while logging in";
         }
     }
-
-    }
+}

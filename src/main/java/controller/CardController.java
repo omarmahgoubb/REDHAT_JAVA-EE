@@ -32,14 +32,22 @@ public class CardController {
         return cardService.getCards();
     }
 	
-	/*
-	 @PUT 
-	 @Path("addcomment/{cardId}")
-	 @Consumes(MediaType.TEXT_PLAIN)
-	    public String addCommentToCard(@PathParam("carId") int cardId , String comment)  {
-		 
-	        return cardService.addCommentToCard(cardId , comment );
+	    @PUT
+	    @Path("addcomment/{title}")
+	    @Consumes(MediaType.TEXT_PLAIN)
+
+	    public String addCommentToCardByTitle(@PathParam("title") String title, String comment) {
+	        return cardService.addCommentToCardByTitle(title, comment);
 	    }
-	    */
+	    
+	    @PUT
+	    @Path("adddesc/{title}")
+	    @Consumes(MediaType.TEXT_PLAIN)
+
+	    public String addDescriptionToCardByTitle(@PathParam("title") String title, String desc) {
+	        return cardService.addDescriptionToCardByTitle(title, desc);
+	    }
+	
+	
 
 }

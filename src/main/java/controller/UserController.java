@@ -29,7 +29,7 @@ public class UserController {
         return userService.getUsers();
     }
 
-    @POST
+    @PUT
     @Path("update_profile")
     public String updateUserProfile(User updatedUser) {
         return userService.updateUserProfile(updatedUser);

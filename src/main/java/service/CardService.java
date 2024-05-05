@@ -17,7 +17,7 @@ public class CardService {
     
 
     
-    /////////////////////////
+    ////////////////////////////////////////////////////////
     public List<Card> getCards()
     {
     	TypedQuery<Card> query =entityManager.createQuery("SELECT c from Card c", Card.class);
@@ -27,7 +27,7 @@ public class CardService {
         // Business logic for fetching users...
     }
     
-    ///////////////
+    ////////////////////////////////////////////////////////////////
     public String createCard(Card card) {
         String cardTitle = card.getTitle();
 
@@ -91,31 +91,25 @@ public class CardService {
     
     ///////////////////////////////////////////////
    
-/*    
-    public String addCommentToCard(int cardId, String comment) {
-    	
-
+    public String addCommentToCardByTitle(String title, String comment) {
         try {
-        	TypedQuery<Card> query =entityManager.createQuery("SELECT z from Card z where z.id =:zid", Card.class);
-        	query.setParameter("zid", id );
-        	Card card = query.getResultList();
-    		return card
-    		;
-    		
-        	Card card = entityManager.find(Card.class, cardId);
-        	
-        	if (card == null ) {
-        		return "Card not found";
-        	}
-        	// add comment
-        	
-        	String existingComment = card.getComment();
+            TypedQuery<Card> query = entityManager.createQuery("SELECT c FROM Card c WHERE c.title = :title", Card.class);
+            query.setParameter("title", title);
+            List<Card> results = query.getResultList();
+
+            if (results.isEmpty()) {
+                return "Card not found with title: " + title;
+            }
+
+            Card card = results.get(0); // Assuming title is unique, get the first result
+            String existingComment = card.getComment();
+
             if (existingComment == null || existingComment.isEmpty()) {
                 card.setComment(comment);
             } else {
-                card.setComment(existingComment + "\n" + comment); // Append new comment to existing comment
+                card.setComment(existingComment +" "+ comment); // Append new comment to existing comment
             }
-            
+
             entityManager.merge(card);
             return "Comment added successfully";
         } catch (Exception e) {
@@ -123,23 +117,27 @@ public class CardService {
             return "An error occurred while adding comment to card";
         }
     }
-    */
     /////////////////////////////////////////////////////////////
-    public String addDetailsToCard(Card cardToUpdate, String description) {
-    	if (cardToUpdate == null ) {
-    		return "Card can not be null";
-    	}
-    	else if (description == null || description.isEmpty()) {
-    		return "description is null or Empty" ;
-    	}
-
+    public String addDescriptionToCardByTitle(String title, String description) {
         try {
-        	
-        	Card existingCard = entityManager.find(Card.class, cardToUpdate.getId() ) ;
-        	// add description
-        	existingCard.setDescription(description); 
-        	
-            entityManager.merge(existingCard);
+            TypedQuery<Card> query = entityManager.createQuery("SELECT c FROM Card c WHERE c.title = :title", Card.class);
+            query.setParameter("title", title);
+            List<Card> results = query.getResultList();
+
+            if (results.isEmpty()) {
+                return "Card not found with title: " + title;
+            }
+
+            Card card = results.get(0); // Assuming title is unique, get the first result
+            String existingDescription = card.getDescription();
+
+            if (existingDescription == null || existingDescription.isEmpty()) {
+                card.setDescription(description);
+            } else {
+                card.setDescription(existingDescription + " "+ description); // Append new description to existing comment
+            }
+
+            entityManager.merge(card);
             return "description added successfully";
         } catch (Exception e) {
             e.printStackTrace();
@@ -147,29 +145,5 @@ public class CardService {
         }
     }
     /////////////////////////////////////////////////////////////////
-    public String addDetailsAndCommentToCard(Card cardToUpdate, String description , String comment ) {
-    	if (cardToUpdate == null ) {
-    		return "Card can not be null";
-    	}
-    	else if (description == null || description.isEmpty()) {
-    		return "description is null or Empty" ;
-    	}
-    	else if (comment == null || comment.isEmpty()) {
-    		return "comment is null or Empty" ;
-    	}
-
-        try {
-        	
-        	Card existingCard = entityManager.find(Card.class, cardToUpdate.getId() ) ;
-        	// add description & comment 
-        	existingCard.setDescription(description); 
-        	existingCard.setComment(comment); 
-
-            entityManager.merge(existingCard);
-            return "description and comment added successfully";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "An error occurred while adding comment to card";
-        }
-    }
+   
 }

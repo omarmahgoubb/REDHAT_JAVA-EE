@@ -4,38 +4,40 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
 import java.util.List;
 import java.util.ArrayList;
 
 @Stateful
 @Entity
 public class Board {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	int Board_id;
-	String boardname;
-	 //ArrayList <cardlist> cardlist;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    private String boardname;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;	
+    
+    @ManyToMany(mappedBy = "collaboratorBoards")
+    private List<User> collaborators = new ArrayList<>();
 	public Board( String boardname) {
 
 		this.boardname = boardname;
-
-	//	this.cardlist = cardlist;
 	}
-	
-//	public ArrayList<cardlist> getCardlist() {
-//		return cardlist;
-//	}
-//	public void setCardlist(ArrayList<cardlist> cardlist) {
-//		this.cardlist = cardlist;
-//	}
 	public Board() {
 		
 	}
 	public int getBoard_id() {
-		return Board_id;
+		return id;
 	}
 	public void setBoard_id(int Board_id) {
-		this.Board_id = Board_id;
+		this.id = Board_id;
 	}
 	public String getboardname() {
 		return boardname;
