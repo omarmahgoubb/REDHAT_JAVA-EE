@@ -33,6 +33,7 @@ public class Card {
     
     @ManyToMany(fetch = FetchType.EAGER)
     private List<User> assignedUsers = new ArrayList<>();
+    //ayman
 //ayman
  /*  // Additional fields and relationships as needed
     @ManyToOne
