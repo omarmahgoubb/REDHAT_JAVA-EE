@@ -10,11 +10,14 @@ public class ListtService
 {
 	@PersistenceContext(unitName="hello")
     private EntityManager entityManager; // Inject EntityManager
-	public String create_lists(Listt list) {
+	public String create_lists(Listt list) 
+	{
 		String type;
 		type=list.getType();
-		try {
-			if (type==null || type.isEmpty()) {
+		try 
+		{
+			if (type==null || type.isEmpty())
+			{
 				return "list type cannot be empty or null";
 			}
 			if ("todo".equalsIgnoreCase(type) ||
@@ -23,16 +26,19 @@ public class ListtService
 	                "done".equalsIgnoreCase(type)) {
 	                list.setType(type);
 	            }
-			else {
+			else 
+			{
 				return "list type must be one of 4 types [todo ,in progress,testing,done]";	
 			}
 			
 		}
-		catch (Exception e) {
+		catch (Exception e) 
+		{
 			 e.printStackTrace(); // This is for demonstration, you may want to log it properly
 		        return "An error occurred during set type of list";
 		}
-		try {
+		try
+		{
 			TypedQuery<Long> query = entityManager.createQuery
 					("SELECT COUNT(l) FROM ListModel l WHERE l.type = "
 							+ ":type", Long.class);
@@ -43,7 +49,7 @@ public class ListtService
 		            }
 					entityManager.persist(type);
 			        return "list added successfully";
-			        }
+		}
 				catch (Exception e) 
 				{
 			        // Log the exception or handle it accordingly
