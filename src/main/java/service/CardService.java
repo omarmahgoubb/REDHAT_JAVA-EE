@@ -172,42 +172,42 @@ public class CardService {
         }
     }
    */
-    
-    public String assignCardToUser(String title, String username) {
-        try {
-            TypedQuery<Card> cardQuery = entityManager.createQuery(
-                    "SELECT c FROM Card c WHERE c.title = :title", Card.class);
-            cardQuery.setParameter("title", title);
-            List<Card> cards = cardQuery.getResultList();
-
-            if (cards.isEmpty()) {
-                return "Card not found with title: " + title;
-            }
-
-            Card card = cards.get(0);
-
-            TypedQuery<User> userQuery = entityManager.createQuery(
-                    "SELECT u FROM User u WHERE u.username = :username", User.class);
-            userQuery.setParameter("username", username);
-            List<User> users = userQuery.getResultList();
-
-            if (users.isEmpty()) {
-                return "User not found with username: " + username;
-            }
-
-            User user = users.get(0);
-
-            // Assign card to user
-            user.addAssignedCard(card);
-            entityManager.merge(user);
-
-            return "Card assigned to user successfully";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "An error occurred while assigning card to user";
-        }
-    }
-
-    
+//    
+//    public String assignCardToUser(String title, String username) {
+//        try {
+//            TypedQuery<Card> cardQuery = entityManager.createQuery(
+//                    "SELECT c FROM Card c WHERE c.title = :title", Card.class);
+//            cardQuery.setParameter("title", title);
+//            List<Card> cards = cardQuery.getResultList();
+//
+//            if (cards.isEmpty()) {
+//                return "Card not found with title: " + title;
+//            }
+//
+//            Card card = cards.get(0);
+//
+//            TypedQuery<User> userQuery = entityManager.createQuery(
+//                    "SELECT u FROM User u WHERE u.username = :username", User.class);
+//            userQuery.setParameter("username", username);
+//            List<User> users = userQuery.getResultList();
+//
+//            if (users.isEmpty()) {
+//                return "User not found with username: " + username;
+//            }
+//
+//            User user = users.get(0);
+//
+//            // Assign card to user
+//            user.addAssignedCard(card);
+//            entityManager.merge(user);
+//
+//            return "Card assigned to user successfully";
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return "An error occurred while assigning card to user";
+//        }
+//    }
+//
+//    
     
 }

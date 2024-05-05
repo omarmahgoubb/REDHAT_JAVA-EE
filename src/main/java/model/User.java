@@ -29,28 +29,28 @@ public class User {
 
     @ManyToMany
     private List<Board> collaboratorBoards = new ArrayList<>();
-
-    @ManyToMany(mappedBy = "assignedUsers")
-    private List<Card> assignedCards = new ArrayList<>(); 
-    
-    public List<Card> getAssignedCards() {
-        return assignedCards;
-    }
-    
-    public void setAssignedCards(List<Card> assignedCards) {
-        this.assignedCards = assignedCards;
-    }
-    
-    public void addAssignedCard(Card card) {
-        this.assignedCards.add(card);
-        card.getAssignedUsers().add(this);
-    }
-    
-    public void removeAssignedCard(Card card) {
-        this.assignedCards.remove(card);
-        card.getAssignedUsers().remove(this);
-    }
-    
+//
+//    @ManyToMany(mappedBy = "assignedUsers")
+//    private List<Card> assignedCards = new ArrayList<>(); 
+//    
+//    public List<Card> getAssignedCards() {
+//        return assignedCards;
+//    }
+//    
+//    public void setAssignedCards(List<Card> assignedCards) {
+//        this.assignedCards = assignedCards;
+//    }
+//    
+//    public void addAssignedCard(Card card) {
+//        this.assignedCards.add(card);
+//        card.getAssignedUsers().add(this);
+//    }
+//    
+//    public void removeAssignedCard(Card card) {
+//        this.assignedCards.remove(card);
+//        card.getAssignedUsers().remove(this);
+//    }
+//    
 	public int getId() 
 	{
 		return id;

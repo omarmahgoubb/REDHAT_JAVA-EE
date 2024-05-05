@@ -89,15 +89,15 @@ public class Card {
 		this.comment = comment;
 	}
 	
-	public void addAssignedUser(User user) {
-        this.assignedUsers.add(user);
-        user.getAssignedCards().add(this);
-    }
-
-    public void removeAssignedUser(User user) {
-        this.assignedUsers.remove(user);
-        user.getAssignedCards().remove(this);
-    }
+//	public void addAssignedUser(User user) {
+//        this.assignedUsers.add(user);
+//        user.getAssignedCards().add(this);
+//    }
+//
+//    public void removeAssignedUser(User user) {
+//        this.assignedUsers.remove(user);
+//        user.getAssignedCards().remove(this);
+//    }
 
     public List<User> getAssignedUsers() {
         return assignedUsers;
