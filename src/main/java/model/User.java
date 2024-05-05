@@ -20,6 +20,7 @@ public class User
 	@NotNull
 	String password;
 	String name;
+	String role;
 	
 	
 	public int getId() 
@@ -36,6 +37,14 @@ public class User
 	public String getName() 
 	{
 		return name;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public void setName(String name) 
@@ -75,5 +84,13 @@ public class User
 		this.email=email;
 		this.password =password;
 		this.name=name;
+	}
+	
+	public User(String email, String password,String name,String role)
+	{
+		this.email=email;
+		this.password =password;
+		this.name=name;
+		this.role=role;
 	}
 }
