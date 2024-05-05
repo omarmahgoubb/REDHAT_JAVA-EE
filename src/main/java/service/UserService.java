@@ -17,7 +17,7 @@ public class UserService {
 
     public String registerUser(User user)
     {
-    	String email=user.getEmail();
+    	    String email=user.getEmail();
 	    	String password=user.getPassword();
 	    	String name=user.getName();
 	    	
