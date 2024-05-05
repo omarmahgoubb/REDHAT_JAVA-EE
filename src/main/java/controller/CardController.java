@@ -48,6 +48,12 @@ public class CardController {
 	        return cardService.addDescriptionToCardByTitle(title, desc);
 	    }
 	    
+	    @PUT
+	    @Path("assign/{cardTitle}/{userName}")
+	    public String assignCradToUser(@PathParam("cardTitle") String cardTitle , @PathParam("userName") String userName ){
+	    	
+	    	return cardService.assignCardToUser(cardTitle, userName);
+	    }
 	    
 	
 	

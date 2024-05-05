@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import model.Card;
+import model.User;
 
 @Stateful
 public class CardService {
@@ -145,5 +146,61 @@ public class CardService {
         }
     }
     /////////////////////////////////////////////////////////////////
-   
+   /* public String assignCardToUser(int cardId, int userId) {
+        try {
+            Card card = entityManager.find(Card.class, cardId);
+            User user = entityManager.find(User.class, userId);
+
+            if (card == null || user == null) {
+                return "Card or User not found";
+            }
+
+            user.addAssignedCard(card);
+            entityManager.merge(user);
+
+            return "Card assigned to user successfully";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "An error occurred while assigning card to user";
+        }
+    }
+   */
+    
+    public String assignCardToUser(String title, String username) {
+        try {
+            TypedQuery<Card> cardQuery = entityManager.createQuery(
+                    "SELECT c FROM Card c WHERE c.title = :title", Card.class);
+            cardQuery.setParameter("title", title);
+            List<Card> cards = cardQuery.getResultList();
+
+            if (cards.isEmpty()) {
+                return "Card not found with title: " + title;
+            }
+
+            Card card = cards.get(0);
+
+            TypedQuery<User> userQuery = entityManager.createQuery(
+                    "SELECT u FROM User u WHERE u.username = :username", User.class);
+            userQuery.setParameter("username", username);
+            List<User> users = userQuery.getResultList();
+
+            if (users.isEmpty()) {
+                return "User not found with username: " + username;
+            }
+
+            User user = users.get(0);
+
+            // Assign card to user
+            user.addAssignedCard(card);
+            entityManager.merge(user);
+
+            return "Card assigned to user successfully";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "An error occurred while assigning card to user";
+        }
+    }
+
+    
+    
 }
