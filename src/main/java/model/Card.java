@@ -36,7 +36,7 @@ public class Card {
 
  /*  // Additional fields and relationships as needed
     @ManyToOne
-    private TaskList taskList;
+    private TaskList taskList....;
 */
     // Getters and setters and constructor 
     
