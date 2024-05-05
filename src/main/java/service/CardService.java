@@ -86,6 +86,9 @@ public class CardService {
         }
     }
 */
+    
+    
+    /////////////
     public String assignCard(int cardId, int userId) {
         try {
             // Implement logic to assign card to a user
@@ -152,6 +155,46 @@ public class CardService {
             return "An error occurred while adding comment to card";
         }
     }
+    
+    ///////////
+    public String assignCardToUser(String cardTitle, String username) {
+        try {
+            // Find the card by its title
+            TypedQuery<Card> cardQuery = entityManager.createQuery(
+                    "SELECT c FROM Card c WHERE c.title = :title", Card.class);
+            cardQuery.setParameter("title", cardTitle);
+            List<Card> cards = cardQuery.getResultList();
+
+            if (cards.isEmpty()) {
+                return "Card not found with title: " + cardTitle;
+            }
+
+            Card card = cards.get(0);
+
+            // Find the user by their username
+            TypedQuery<User> userQuery = entityManager.createQuery(
+                    "SELECT u FROM User u WHERE u.username = :username", User.class);
+            userQuery.setParameter("username", username);
+            List<User> users = userQuery.getResultList();
+
+            if (users.isEmpty()) {
+                return "User not found with username: " + username;
+            }
+
+            User user = users.get(0);
+
+            // Assign the card to the user
+            card.getAssignedUsers().add(user);
+            entityManager.merge(card);
+
+            return "Card assigned to user successfully";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "An error occurred while assigning card to user";
+        }
+    }
+
+    
     /////////////////////////////////////////////////////////////////
    /* public String assignCardToUser(int cardId, int userId) {
         try {

@@ -1,5 +1,6 @@
 package service;
 
+import model.Card;
 import model.User;
 
 import javax.ejb.Stateful;
@@ -194,4 +195,5 @@ public class UserService {
             return "An error occurred while logging in";
         }
     }
+
 }

@@ -29,8 +29,9 @@ public class Card {
     private String description;
     private String comment;
     
+ 
+    
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name="title")
     private List<User> assignedUsers = new ArrayList<>();
 
  /*  // Additional fields and relationships as needed

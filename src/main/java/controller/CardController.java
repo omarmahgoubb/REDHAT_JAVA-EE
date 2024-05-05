@@ -6,7 +6,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 import model.Card;
-import model.User;
 import service.CardService;
 
 import java.util.List;
@@ -47,6 +46,15 @@ public class CardController {
 	    public String addDescriptionToCardByTitle(@PathParam("title") String title, String desc) {
 	        return cardService.addDescriptionToCardByTitle(title, desc);
 	    }
+	    
+	    @PUT
+	    @Path("assign/{cardTitle}/{username}")
+	    public String assignCardToUser(
+	            @PathParam("cardTitle") String cardTitle,
+	            @PathParam("username") String username) {
+	        return cardService.assignCardToUser(cardTitle, username);
+	    }
+
 //	    
 //	    @PUT
 //	    @Path("assign/{cardTitle}/{userName}")

@@ -29,6 +29,10 @@ public class User {
 
     @ManyToMany
     private List<Board> collaboratorBoards = new ArrayList<>();
+    
+    @ManyToMany(mappedBy = "assignedUsers")
+    private List<Card> assignedCards = new ArrayList<>();
+
 //
 //    @ManyToMany(mappedBy = "assignedUsers")
 //    private List<Card> assignedCards = new ArrayList<>(); 
