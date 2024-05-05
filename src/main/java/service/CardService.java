@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import model.Board;
 import model.Card;
 import model.User;
 
@@ -19,15 +20,21 @@ public class CardService {
 
     
     ////////////////////////////////////////////////////////
-    public List<Card> getCards()
+  /*  public List<Card> getCards()
     {
     	TypedQuery<Card> query =entityManager.createQuery("SELECT c from Card c", Card.class);
 		List <Card> cards= query.getResultList();
 		
 		return cards;
         // Business logic for fetching users...
-    }
+    }*/
     
+    public List<Card> getCards() {
+        // Create and execute the query to retrieve all cards
+        TypedQuery<Card> query = entityManager.createQuery("SELECT c FROM Card c", Card.class);
+        List<Card> cards = query.getResultList();
+        return cards;
+    }    
     ////////////////////////////////////////////////////////////////
     public String createCard(Card card) {
         String cardTitle = card.getTitle();
