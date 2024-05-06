@@ -18,6 +18,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Card {
     @Id
@@ -39,8 +41,27 @@ public class Card {
 
     @ManyToOne
     @JoinColumn(name ="listid")
+    @JsonBackReference
     private AymanTestModel list;
+    
+    public Card(int cardid, String title, String description, String comment, List<User> assignedUsers,
+			AymanTestModel list) 
+    {
+		this.cardid = cardid;
+		this.title = title;
+		this.description = description;
+		this.comment = comment;
+		this.assignedUsers = assignedUsers;
+		this.list = list;
+	}
+    
+    
+    public Card( String title) 
+    {
+		this.title = title;
+	}
 
+	public Card() {}
 	public int getCardid() {
 		return cardid;
 	}
@@ -60,6 +81,11 @@ public class Card {
 	public List<User> getAssignedUsers() {
 		return assignedUsers;
 	}
+	
+	public void setAssignedUsers(List<User> assignedUsers) {
+		this.assignedUsers = assignedUsers;
+	}
+
 
 	public AymanTestModel getList() {
 		return list;
@@ -81,29 +107,11 @@ public class Card {
 		this.comment = comment;
 	}
 
-	public void setAssignedUsers(List<User> assignedUsers) {
-		this.assignedUsers = assignedUsers;
-	}
-
 	public void setList(AymanTestModel list) {
 		this.list = list;
 	}
 
-	public Card(int cardid, String title, String description, String comment, List<User> assignedUsers,
-			AymanTestModel list) {
-		this.cardid = cardid;
-		this.title = title;
-		this.description = description;
-		this.comment = comment;
-		this.assignedUsers = assignedUsers;
-		this.list = list;
-	}
-
-	public Card() {
-	}
-
-
-    
+	 
     
     
     

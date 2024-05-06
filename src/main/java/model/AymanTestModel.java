@@ -1,8 +1,10 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Entity
 
 public class AymanTestModel
@@ -23,11 +28,12 @@ public class AymanTestModel
 	 
 	 @ManyToOne
 	 @JoinColumn(name= "boardid")
+	 @JsonBackReference
 	 Board board;
 	 
-	 
-	 @OneToMany(mappedBy="list")
-	 ArrayList <Card> cards;
+	 @OneToMany(mappedBy="list", fetch = FetchType.EAGER)
+	 @JsonManagedReference
+	 List <Card> cards;
 
 
 	public int getListid() {
@@ -45,7 +51,7 @@ public class AymanTestModel
 	}
 
 
-	public ArrayList<Card> getCards() {
+	public List<Card> getCards() {
 		return cards;
 	}
 
@@ -65,7 +71,7 @@ public class AymanTestModel
 	}
 
 
-	public void setCards(ArrayList<Card> cards) {
+	public void setCards(List<Card> cards) {
 		this.cards = cards;
 	}
 

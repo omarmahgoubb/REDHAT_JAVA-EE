@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -30,11 +33,12 @@ public class User {
     private String name;
     private String role;
 
-   @ManyToMany(mappedBy="boardUsers")
+    
+   @ManyToMany(mappedBy="boardUsers",fetch = FetchType.EAGER)
+   @JsonIgnore
     private List<Board> Boards = new ArrayList<>();
     
-   @ManyToMany(fetch = FetchType.EAGER, mappedBy = "assignedUsers")
- 
+   @ManyToMany( mappedBy = "assignedUsers")
    private List<Card> assignedCards = new ArrayList<>();
 
 public int getUserid() {
@@ -101,8 +105,8 @@ public void setAssignedCards(List<Card> assignedCards) {
 	this.assignedCards = assignedCards;
 }
 
-public User(int userid, @NotNull String email, String username, @NotNull String password, String name, String role,
-		List<Board> boards, List<Card> assignedCards) {
+public User(int userid,String email, String username,
+		String password, String name, String role,List<Board> boards, List<Card> assignedCards) {
 	this.userid = userid;
 	this.email = email;
 	this.username = username;
@@ -113,9 +117,19 @@ public User(int userid, @NotNull String email, String username, @NotNull String 
 	this.assignedCards = assignedCards;
 }
 
-public User() {
-}
+public User() {}
    
+
+public User(int userid,String email, String username,
+		String password, String name, String role)
+{
+	this.userid = userid;
+	this.email = email;
+	this.username = username;
+	this.password = password;
+	this.name = name;
+	this.role = role;
+}
    
    
    

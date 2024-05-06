@@ -1,5 +1,6 @@
 package model;
 import javax.ejb.Stateful;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,14 +26,14 @@ public class Board
     private String boardname;
 
   
-    @ManyToMany()
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name="userxboard",
 	joinColumns=@JoinColumn(name="boardid"),
 	inverseJoinColumns=@JoinColumn(name="userid"))
     private List<User> boardUsers = new ArrayList<>();
 
     
-   @OneToMany(mappedBy="board")
+   @OneToMany(mappedBy="board",fetch = FetchType.EAGER , cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AymanTestModel> cardlist;
 
 

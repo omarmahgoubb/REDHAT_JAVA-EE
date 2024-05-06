@@ -15,55 +15,59 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 
-public class CardController {
+public class CardController
+{
 	@EJB 
 	private CardService cardService;
 	
-	@POST
-    @Path("create")
-    public String createCard(Card card) {
-        return cardService.createCard(card);
-    }
-	
 	@GET
     @Path("getcards")
-    public List<Card> getCards() {
+    public List<Card> getCards() 
+	{
         return cardService.getCards();
     }
 	
-	    @PUT
-	    @Path("addcomment/{title}")
-	    @Consumes(MediaType.TEXT_PLAIN)
-
-	    public String addCommentToCardByTitle(@PathParam("title") String title, String comment) {
+	@POST
+    @Path("create")
+    public String createCard(Card card)
+	{
+        return cardService.createCard(card);
+    }
+	
+	
+	@PUT
+	@Path("addcomment/{title}")
+	@Consumes(MediaType.TEXT_PLAIN)
+	public String addCommentToCardByTitle(@PathParam("title") String title, String comment)
+	{
 	        return cardService.addCommentToCardByTitle(title, comment);
-	    }
+	}
 	    
-	    @PUT
-	    @Path("adddesc/{title}")
-	    @Consumes(MediaType.TEXT_PLAIN)
+	@PUT
+	@Path("adddesc/{title}")
+	@Consumes(MediaType.TEXT_PLAIN)
 
-	    public String addDescriptionToCardByTitle(@PathParam("title") String title, String desc) {
+	    public String addDescriptionToCardByTitle(@PathParam("title") String title, String desc)
+	{
 	        return cardService.addDescriptionToCardByTitle(title, desc);
-	    }
+	}
+	    
+//	    @PUT
+//	    @Path("assign/{cardTitle}/{username}")
+//	    public String assignCardToUser(
+//	            @PathParam("cardTitle") String cardTitle,
+//	            @PathParam("username") String username) {
+//	        return cardService.assignCardToUser(cardTitle, username);
+//	    }
 	    
 	    @PUT
-	    @Path("assign/{cardTitle}/{username}")
-	    public String assignCardToUser(
-	            @PathParam("cardTitle") String cardTitle,
-	            @PathParam("username") String username) {
-	        return cardService.assignCardToUser(cardTitle, username);
+	    @Path("assign/{cardTitle}/{userName}")
+	    public String assignCardToUser
+	    (@PathParam("cardTitle") String cardTitle , @PathParam("userName") String userName )
+	    {	
+	    	return cardService.assignCardToUser(cardTitle, userName);
 	    }
 
-//	    
-//	    @PUT
-//	    @Path("assign/{cardTitle}/{userName}")
-//	    public String assignCradToUser(@PathParam("cardTitle") String cardTitle , @PathParam("userName") String userName ){
-//	    	
-//	    	return cardService.assignCardToUser(cardTitle, userName);
-//	    }
-//	    
-//	
 	
 
 }

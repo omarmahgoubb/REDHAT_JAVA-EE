@@ -104,27 +104,22 @@ public class UserService {
 		List <User> users= query.getResultList();
 		
 		return users;
-        // Business logic for fetching users...
     }
     public String updateUserProfile(User updatedUser)
     {
         try {
-            // Query to find the user by username
             TypedQuery<User> query = entityManager.createQuery(
                 "SELECT u FROM User u WHERE u.username = :username",
                 User.class);
             query.setParameter("username", updatedUser.getUsername());
             
-            // Execute the query
             List<User> resultList = query.getResultList();
             
-            // Check if the user exists
             if (resultList.isEmpty())
             {
                 return "User not found";
             }
             
-            // Assuming username is unique, there should be only one result
             User existingUser = resultList.get(0);
 
             // Update profile information
