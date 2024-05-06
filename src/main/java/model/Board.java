@@ -33,35 +33,63 @@ public class Board
 
     
    @OneToMany(mappedBy="board")
-    private List<AymanTestModel> cardlist; 
-    
-    
-	public List<User> getboardYsers() {
-		return boardUsers;
-	}
-	public void setboardUsers(List<User> collaborators) {
-		this.boardUsers = collaborators;
-	}
-	
-	public Board( String boardname) {
+    private List<AymanTestModel> cardlist;
 
-		this.boardname = boardname;
-	}
-	public Board() {
-		
-	}
-	public int getBoard_id() {
-		return boardid;
-	}
-	public void setBoard_id(int Board_id) {
-		this.boardid = Board_id;
-	}
-	public String getboardname() {
-		return boardname;
-	}
-	public void setboardname(String boardname) {
-		this.boardname = boardname;
-	}
+
+public int getBoardid() {
+	return boardid;
+}
+
+
+public String getBoardname() {
+	return boardname;
+}
+
+
+public List<User> getBoardUsers() {
+	return boardUsers;
+}
+
+
+public List<AymanTestModel> getCardlist() {
+	return cardlist;
+}
+
+
+public void setBoardid(int boardid) {
+	this.boardid = boardid;
+}
+
+
+public void setBoardname(String boardname) {
+	this.boardname = boardname;
+}
+
+
+public void setBoardUsers(List<User> boardUsers) {
+	this.boardUsers = boardUsers;
+}
+
+
+public void setCardlist(List<AymanTestModel> cardlist) {
+	this.cardlist = cardlist;
+}
+
+
+public Board(int boardid, String boardname, List<User> boardUsers, List<AymanTestModel> cardlist) {
+	this.boardid = boardid;
+	this.boardname = boardname;
+	this.boardUsers = boardUsers;
+	this.cardlist = cardlist;
+}
+
+
+public Board() {
+} 
+    
+    
+	
+	
 	
 	
 }

@@ -27,33 +27,62 @@ public class AymanTestModel
 	 
 	 
 	 @OneToMany(mappedBy="list")
-	ArrayList <Card> cards;
-	
-	
-	
-	
-	public String getType()
-	{
+	 ArrayList <Card> cards;
+
+
+	public int getListid() {
+		return listid;
+	}
+
+
+	public String getType() {
 		return type;
 	}
-	public void setType(String type)
-	{
-		this.type = type;
+
+
+	public Board getBoard() {
+		return board;
 	}
-	public ArrayList<Card> getCards() 
-	{
+
+
+	public ArrayList<Card> getCards() {
 		return cards;
 	}
-	public void setCards(ArrayList<Card> cards)
-	{
-		this.cards = cards;
+
+
+	public void setListid(int listid) {
+		this.listid = listid;
 	}
-	public AymanTestModel(String type, ArrayList<Card> cards) 
-	{
-		//this.usercreate=user;
+
+
+	public void setType(String type) {
 		this.type = type;
+	}
+
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
+
+	public void setCards(ArrayList<Card> cards) {
 		this.cards = cards;
 	}
-	public AymanTestModel() 
-	{}
+
+
+	public AymanTestModel(int listid, @NotNull String type, Board board, ArrayList<Card> cards) {
+		this.listid = listid;
+		this.type = type;
+		this.board = board;
+		this.cards = cards;
+	}
+
+
+	public AymanTestModel() {
+	}
+	
+	
+	
+	
+
 }

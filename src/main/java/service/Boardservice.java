@@ -18,7 +18,7 @@ public class Boardservice {
     private EntityManager entitymanager;
    
    public String createBoard(Board board, String username) {
-	    String boardname = board.getboardname();
+	    String boardname = board.getBoardname();
 	    
 	    try {
 	        if (boardname == null || boardname.isEmpty()) {
@@ -42,8 +42,8 @@ public class Boardservice {
 	        List<User> boardUsers = userQuery.getResultList();
 
 	        // Set the board users and board name
-	        board.setboardUsers(boardUsers);
-	        board.setboardname(boardname); // This line seems redundant
+	        board.setBoardUsers(boardUsers);
+	        board.setBoardname(boardname); // This line seems redundant
 	        
 	        // Persist the board entity
 	        entitymanager.persist(board);

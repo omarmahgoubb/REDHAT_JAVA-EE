@@ -19,15 +19,7 @@ public class CardService {
     
 
     
-    ////////////////////////////////////////////////////////
-  /*  public List<Card> getCards()
-    {
-    	TypedQuery<Card> query =entityManager.createQuery("SELECT c from Card c", Card.class);
-		List <Card> cards= query.getResultList();
-		
-		return cards;
-        // Business logic for fetching users...
-    }*/
+  
     
     public List<Card> getCards() {
         // Create and execute the query to retrieve all cards
@@ -35,7 +27,7 @@ public class CardService {
         List<Card> cards = query.getResultList();
         return cards;
     }    
-    ////////////////////////////////////////////////////////////////
+   
     public String createCard(Card card) {
         String cardTitle = card.getTitle();
 
@@ -56,7 +48,7 @@ public class CardService {
 
             // If no existing card found with the same title, proceed to persist the new card
             entityManager.persist(card);
-            System.out.println("After persist - Card ID: " + card.getId());
+            System.out.println("After persist - Card ID: " + card.getCardid());
             System.out.println("After persist - Card title: " + card.getTitle());
 
             return "Card created successfully";
@@ -66,32 +58,7 @@ public class CardService {
         }
     }
 
-/*
-    public String moveCard(int cardId, int newListId) {
-        try {
-            Card card = entityManager.find(Card.class, cardId);
-            if (card == null) {
-                return "Card not found";
-            }
-            TaskList newList = entityManager.find(TaskList.class, newListId);
-            if (newList == null) {
-                return "Destination list not found";
-            }
-            card.setTaskList(newList);
-            entityManager.merge(card);
-            return "Card moved successfully";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "An error occurred while moving card";
-        }
-    }
-*/
-    
-    
-    /////////////
- 
-    
-    ///////////////////////////////////////////////
+
    
     public String addCommentToCardByTitle(String title, String comment) {
         try {
@@ -243,5 +210,39 @@ public class CardService {
 //    }
 //
 //    
+    /*
+    public String moveCard(int cardId, int newListId) {
+        try {
+            Card card = entityManager.find(Card.class, cardId);
+            if (card == null) {
+                return "Card not found";
+            }
+            TaskList newList = entityManager.find(TaskList.class, newListId);
+            if (newList == null) {
+                return "Destination list not found";
+            }
+            card.setTaskList(newList);
+            entityManager.merge(card);
+            return "Card moved successfully";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "An error occurred while moving card";
+        }
+    }
+*/
     
+    ////////////////////////////////////////////////////////
+    /*  public List<Card> getCards()
+      {
+      	TypedQuery<Card> query =entityManager.createQuery("SELECT c from Card c", Card.class);
+  		List <Card> cards= query.getResultList();
+  		
+  		return cards;
+          // Business logic for fetching users...
+      }*/
+    //////////////////////////////////////////////////////////////// 
+    /////////////
+ 
+    
+    ///////////////////////////////////////////////    
 }

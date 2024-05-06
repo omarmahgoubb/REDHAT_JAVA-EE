@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int cardid;
 
     @Column(nullable = false)
 	private String title;
@@ -40,67 +40,72 @@ public class Card {
     @ManyToOne
     @JoinColumn(name ="listid")
     private AymanTestModel list;
-    
-    
-    
-    
-    public Card() {
-    }
-    public Card (String title) {
-    	this.title=title;
-    }
-    
-    public Card(String title, String description, String comment) {
-        this.title = title;
-        this.description = description;
-        this.comment = comment;
-    }
-    
-    public Card(String title, String description) {
-        this.title = title;
-        this.description = description;
-        
-    }
-    
-    public int getId() {
-		return id;
-	}
 
-	public void setId(int id) {
-		this.id = id;
+	public int getCardid() {
+		return cardid;
 	}
 
 	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
 	public String getDescription() {
 		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public String getComment() {
 		return comment;
 	}
 
+	public List<User> getAssignedUsers() {
+		return assignedUsers;
+	}
+
+	public AymanTestModel getList() {
+		return list;
+	}
+
+	public void setCardid(int cardid) {
+		this.cardid = cardid;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	
+
+	public void setAssignedUsers(List<User> assignedUsers) {
+		this.assignedUsers = assignedUsers;
+	}
+
+	public void setList(AymanTestModel list) {
+		this.list = list;
+	}
+
+	public Card(int cardid, String title, String description, String comment, List<User> assignedUsers,
+			AymanTestModel list) {
+		this.cardid = cardid;
+		this.title = title;
+		this.description = description;
+		this.comment = comment;
+		this.assignedUsers = assignedUsers;
+		this.list = list;
+	}
+
+	public Card() {
+	}
 
 
-    public List<User> getAssignedUsers() {
-        return assignedUsers;
-    }
-    public void setAssignedUsers(List<User> assignedUsers) {
-        this.assignedUsers = assignedUsers;
-    }
+    
+    
+    
+    
     
 }

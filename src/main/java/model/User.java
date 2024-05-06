@@ -20,7 +20,7 @@ import java.util.Set;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int userid;
 
     @NotNull
     private String email;
@@ -34,88 +34,90 @@ public class User {
     private List<Board> Boards = new ArrayList<>();
     
    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "assignedUsers")
-    private List<Card> assignedCards = new ArrayList<>();
+ 
+   private List<Card> assignedCards = new ArrayList<>();
 
-	public int getId() 
-	{
-		return id;
-	}
+public int getUserid() {
+	return userid;
+}
 
-	public void setId(int id)
-	{
-		this.id = id;
-	}
+public String getEmail() {
+	return email;
+}
 
-	public String getUsername() {
-		return username;
-	}
+public String getUsername() {
+	return username;
+}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+public String getPassword() {
+	return password;
+}
 
+public String getName() {
+	return name;
+}
 
-	public String getName() 
-	{
-		return name;
-	}
+public String getRole() {
+	return role;
+}
 
-	public String getRole() {
-		return role;
-	}
+public List<Board> getBoards() {
+	return Boards;
+}
 
-	public void setRole(String role) {
-		this.role = role;
-	}
+public List<Card> getAssignedCards() {
+	return assignedCards;
+}
 
-	public void setName(String name) 
-	{
-		this.name = name;
-	}
+public void setUserid(int userid) {
+	this.userid = userid;
+}
 
-	public String getEmail() 
-	{
-		return email;
-	}
+public void setEmail(String email) {
+	this.email = email;
+}
 
-	public void setEmail(String email)
-	{
-		this.email = email;
-	}
+public void setUsername(String username) {
+	this.username = username;
+}
 
-	public String getPassword() 
-	{
-		return password;
-	}
+public void setPassword(String password) {
+	this.password = password;
+}
 
-	public void setPassword(String password)
-	{
-		this.password = password;
-	}
+public void setName(String name) {
+	this.name = name;
+}
 
-	public User(){}
-	
-	public User(String email, String password)
-	{
-		this.email=email;
-		this.password =password;
-	}
-	public User(String email, String password,String name)
-	{
-		this.email=email;
-		this.password =password;
-		this.name=name;
-	}
-	
-	public User(String email, String password,String name,String role)
-	{
-		this.email=email;
-		this.password =password;
-		this.name=name;
-		this.role=role;
-	}
-	
-	
-	
-	
+public void setRole(String role) {
+	this.role = role;
+}
+
+public void setBoards(List<Board> boards) {
+	Boards = boards;
+}
+
+public void setAssignedCards(List<Card> assignedCards) {
+	this.assignedCards = assignedCards;
+}
+
+public User(int userid, @NotNull String email, String username, @NotNull String password, String name, String role,
+		List<Board> boards, List<Card> assignedCards) {
+	this.userid = userid;
+	this.email = email;
+	this.username = username;
+	this.password = password;
+	this.name = name;
+	this.role = role;
+	Boards = boards;
+	this.assignedCards = assignedCards;
+}
+
+public User() {
+}
+   
+   
+   
+   
+   
 }
