@@ -30,7 +30,7 @@ public class Boardservice {
     		            "SELECT u FROM User u WHERE u.username = :username", User.class);
     		        userQuery.setParameter("username", username);
     		        User owner = userQuery.getSingleResult();
-    		        board.setOwner(owner);
+    		       // board.setOwner(owner);
     		        board.setboardname(boardname);
     		TypedQuery<Long> query = entitymanger.createQuery(
     			    "SELECT COUNT(n) FROM Board n WHERE n.boardname = "+ 
@@ -78,9 +78,9 @@ public class Boardservice {
             return "Board not found"; // Return an appropriate message if the board doesn't exist
         }
         
-        if (!existingBoard.getOwner().getUsername().equals(username)) {
-            return "You are not authorized to delete this board";
-        }
+//        if (!existingBoard.getOwner().getUsername().equals(username)) {
+//            return "You are not authorized to delete this board";
+//        }
 
         entitymanger.remove(existingBoard);            
         return "Board deleted successfully";

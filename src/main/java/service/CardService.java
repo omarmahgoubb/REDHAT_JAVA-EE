@@ -89,16 +89,7 @@ public class CardService {
     
     
     /////////////
-    public String assignCard(int cardId, int userId) {
-        try {
-            // Implement logic to assign card to a user
-            return "Card assigned successfully";
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "An error occurred while assigning card";
-        }
-    }
-
+ 
     
     ///////////////////////////////////////////////
    

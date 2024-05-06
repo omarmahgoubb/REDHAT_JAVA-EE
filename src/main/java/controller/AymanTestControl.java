@@ -3,9 +3,11 @@ package controller;
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import model.AymanTestModel;
@@ -24,5 +26,10 @@ public class AymanTestControl {
     @Path("add_list")
     public String registerUser(AymanTestModel list) {
         return listservice.create_lists( list);
+    }
+    @DELETE
+    @Path("delete_list")
+    public String deletelist( @QueryParam("type") String type) {
+        return listservice.deletelist( type);
     }
 }

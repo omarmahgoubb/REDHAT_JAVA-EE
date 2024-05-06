@@ -1,6 +1,7 @@
 package model;
 import javax.ejb.Stateful;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,31 +14,28 @@ import java.util.ArrayList;
 
 @Stateful
 @Entity
-public class Board {
+public class Board 
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String boardname;
 
-    @ManyToOne
-    @JoinColumn(name = "owner_id")
-    private User owner;	
+   
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "Boards")
+    private List<User> boardUsers = new ArrayList<>();
     
-    public User getOwner() {
-		return owner;
+    
+   
+	
+	public List<User> getboardYsers() {
+		return boardUsers;
 	}
-	public void setOwner(User owner) {
-		this.owner = owner;
+	public void setboardUsers(List<User> collaborators) {
+		this.boardUsers = collaborators;
 	}
-	public List<User> getCollaborators() {
-		return collaborators;
-	}
-	public void setCollaborators(List<User> collaborators) {
-		this.collaborators = collaborators;
-	}
-	@ManyToMany(mappedBy = "collaboratorBoards")
-    private List<User> collaborators = new ArrayList<>();
+	
 	public Board( String boardname) {
 
 		this.boardname = boardname;

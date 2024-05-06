@@ -5,6 +5,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
@@ -28,11 +30,18 @@ public class User {
     private String role;
 
     @ManyToMany
-    private List<Board> collaboratorBoards = new ArrayList<>();
+    @JoinTable(name="userxboard",
+	joinColumns=@JoinColumn(name="userID"),
+	inverseJoinColumns=@JoinColumn(name="boardID"))
+    private List<Board> Boards = new ArrayList<>();
     
-    @ManyToMany(mappedBy = "assignedUsers")
+    @ManyToMany
+    @JoinTable(name="userxcard",
+    			joinColumns=@JoinColumn(name="userID"),
+    			inverseJoinColumns=@JoinColumn(name="cardID"))
     private List<Card> assignedCards = new ArrayList<>();
 
+    
 //
 //    @ManyToMany(mappedBy = "assignedUsers")
 //    private List<Card> assignedCards = new ArrayList<>(); 

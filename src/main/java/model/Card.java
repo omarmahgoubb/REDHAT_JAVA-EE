@@ -31,15 +31,9 @@ public class Card {
     
  
     
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "assignedCards")
     private List<User> assignedUsers = new ArrayList<>();
-    //ayman
-//ayman
- /*  // Additional fields and relationships as needed
-    @ManyToOne
-    private TaskList taskList....;
-*/
-    // Getters and setters and constructor 
+
     
     public Card() {
     }
