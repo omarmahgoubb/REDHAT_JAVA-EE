@@ -33,7 +33,7 @@ public class Card {
     private String comment;
     
  
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="userxcard",
 	joinColumns=@JoinColumn(name="cardID"),
 	inverseJoinColumns=@JoinColumn(name="userID"))

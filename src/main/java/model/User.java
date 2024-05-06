@@ -38,7 +38,8 @@ public class User {
    @JsonIgnore
     private List<Board> Boards = new ArrayList<>();
     
-   @ManyToMany( mappedBy = "assignedUsers")
+   @ManyToMany( mappedBy = "assignedUsers",fetch = FetchType.EAGER)
+   @JsonIgnore
    private List<Card> assignedCards = new ArrayList<>();
 
 public int getUserid() {
