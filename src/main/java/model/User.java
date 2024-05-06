@@ -1,5 +1,6 @@
 package model;
 
+import javax.ejb.Stateful;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -30,9 +31,9 @@ public class User {
     private String role;
 
     @ManyToMany
-    @JoinTable(name="userxboard",
+   /* @JoinTable(name="userxboard",
 	joinColumns=@JoinColumn(name="userID"),
-	inverseJoinColumns=@JoinColumn(name="boardID"))
+	inverseJoinColumns=@JoinColumn(name="boardID"))*/
     private List<Board> Boards = new ArrayList<>();
     
     @ManyToMany

@@ -26,20 +26,30 @@ public class BoardController {
 	public String createboard(Board board, @QueryParam("username") String username) {
 		return boardservice.createBoard(board,username); 
 	}
+	/*
 	@GET
 	@Path("get_boards")
 	public List<Board> getboards(@QueryParam("username") String username) {
-		    return boardservice.getboards(username);
+		    return boardservice.getBoards(username);
 		}	
+		
 		@DELETE
 	    @Path("deleteboard}")
 	    public String deleteBoard(@QueryParam("boardname") String boardname, @QueryParam("username") String username) {
 
 	        return boardservice.deleteboard(boardname, username);
-	       
-
-	        
-	    }
+	              
+	    }*/
+		@GET
+		@Path("getall")
+		public List<Board> getallBoards(){
+			return boardservice.getallBoards();
+		}
 	
-
+/*	@GET
+	@Path("get_boards")
+	public List<Board> getboards() {
+	    return boardservice.getBoards();
+	}	
+*/
 }

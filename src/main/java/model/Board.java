@@ -22,10 +22,13 @@ public class Board
 
     private String boardname;
 
-   
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "Boards")
+   /*
+    @ManyToMany( mappedBy = "Boards" , fetch = FetchType.EAGER)
     private List<User> boardUsers = new ArrayList<>();
-    
+    */
+    @ManyToMany(mappedBy = "Boards")
+    private List<User> boardUsers = new ArrayList<>();
+
     
    
 	
