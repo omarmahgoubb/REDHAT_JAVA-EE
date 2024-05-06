@@ -6,8 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -18,20 +20,22 @@ public class Board
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int boardid;
 
     private String boardname;
 
-   /*
-    @ManyToMany( mappedBy = "Boards" , fetch = FetchType.EAGER)
-    private List<User> boardUsers = new ArrayList<>();
-    */
-    @ManyToMany(mappedBy = "Boards")
+  
+    @ManyToMany()
+    @JoinTable(name="userxboard",
+	joinColumns=@JoinColumn(name="boardid"),
+	inverseJoinColumns=@JoinColumn(name="userid"))
     private List<User> boardUsers = new ArrayList<>();
 
     
-   
-	
+   @OneToMany(mappedBy="board")
+    private List<AymanTestModel> cardlist; 
+    
+    
 	public List<User> getboardYsers() {
 		return boardUsers;
 	}
@@ -47,10 +51,10 @@ public class Board
 		
 	}
 	public int getBoard_id() {
-		return id;
+		return boardid;
 	}
 	public void setBoard_id(int Board_id) {
-		this.id = Board_id;
+		this.boardid = Board_id;
 	}
 	public String getboardname() {
 		return boardname;

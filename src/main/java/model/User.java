@@ -30,41 +30,12 @@ public class User {
     private String name;
     private String role;
 
-    @ManyToMany
-   /* @JoinTable(name="userxboard",
-	joinColumns=@JoinColumn(name="userID"),
-	inverseJoinColumns=@JoinColumn(name="boardID"))*/
+   @ManyToMany(mappedBy="boardUsers")
     private List<Board> Boards = new ArrayList<>();
     
-    @ManyToMany
-    @JoinTable(name="userxcard",
-    			joinColumns=@JoinColumn(name="userID"),
-    			inverseJoinColumns=@JoinColumn(name="cardID"))
+   @ManyToMany(fetch = FetchType.EAGER, mappedBy = "assignedUsers")
     private List<Card> assignedCards = new ArrayList<>();
 
-    
-//
-//    @ManyToMany(mappedBy = "assignedUsers")
-//    private List<Card> assignedCards = new ArrayList<>(); 
-//    
-//    public List<Card> getAssignedCards() {
-//        return assignedCards;
-//    }
-//    
-//    public void setAssignedCards(List<Card> assignedCards) {
-//        this.assignedCards = assignedCards;
-//    }
-//    
-//    public void addAssignedCard(Card card) {
-//        this.assignedCards.add(card);
-//        card.getAssignedUsers().add(this);
-//    }
-//    
-//    public void removeAssignedCard(Card card) {
-//        this.assignedCards.remove(card);
-//        card.getAssignedUsers().remove(this);
-//    }
-//    
 	public int getId() 
 	{
 		return id;

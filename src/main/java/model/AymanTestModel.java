@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 @Entity
 
@@ -13,18 +16,22 @@ public class AymanTestModel
 {
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 private int id;
+	 private int listid;
 	 @NotNull
 	String type;
-//	 public User getUsercreate() {
-//		return usercreate;
-//	}
-//	public void setUsercreate(User usercreate) {
-//		this.usercreate = usercreate;
-//	}
-	//User usercreate;
-	
+	 
+	 
+	 @ManyToOne
+	 @JoinColumn(name= "boardid")
+	 Board board;
+	 
+	 
+	 @OneToMany(mappedBy="list")
 	ArrayList <Card> cards;
+	
+	
+	
+	
 	public String getType()
 	{
 		return type;
