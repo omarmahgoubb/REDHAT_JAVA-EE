@@ -18,7 +18,7 @@ public class Boardservice {
    @PersistenceContext(unitName="hello")
     private EntityManager entitymanager;
    
-   public String createBoard(Board board, String username) {
+  public String createBoard(Board board, String username) {
 	    String boardname = board.getBoardname();
 	    
 	    try {
@@ -39,7 +39,9 @@ public class Boardservice {
 	                "SELECT u FROM User u WHERE u.username = :username", User.class);
 	        userQuery.setParameter("username", username);
 	        List<User> boardUsers = userQuery.getResultList();
+	       // User user = boardUsers.get(0);
 
+	       // board.getBoardUsers().add(user);
 	        board.setBoardUsers(boardUsers);
 	        board.setBoardname(boardname); // This line seems redundant
 	        
@@ -52,18 +54,18 @@ public class Boardservice {
 	        return "An error occurred during board creation";
 	    }
 	}
-
    public List<Board> getBoards(int id) 
    {
 	 
 		   
-	    TypedQuery<Board> query = entitymanager.createQuery(
-	        "SELECT b FROM Board b JOIN FETCH b.boardUsers u WHERE u.id = :id", Board.class);
-	    query.setParameter("id", id);
-	    return query.getResultList();
-	    }
-	 
-	
+	   TypedQuery<Board> query = entitymanager.createQuery(
+			    "SELECT b FROM Board b JOIN b.boardUsers u WHERE u.userid = :id", Board.class);
+			query.setParameter("id", id);
+			return query.getResultList();
+
+   }
+   
+ 
 
      
     
@@ -91,5 +93,7 @@ public class Boardservice {
 
     
     
-}
+} 
+   
+  
 }

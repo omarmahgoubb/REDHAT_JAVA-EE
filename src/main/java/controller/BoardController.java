@@ -21,6 +21,8 @@ import javax.ws.rs.core.MediaType;
 public class BoardController {
 	@EJB
     private Boardservice boardservice;
+	
+	
 	@POST
 	@Path("create")
 	public String createboard(Board board, @QueryParam("username") String username) {
@@ -32,4 +34,6 @@ public class BoardController {
 	    return boardservice.getBoards( id);
 	}	
 
+	
+	
 }

@@ -26,7 +26,7 @@ public class Board
     private String boardname;
 
   
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="userxboard",
 	joinColumns=@JoinColumn(name="boardid"),
 	inverseJoinColumns=@JoinColumn(name="userid"))
