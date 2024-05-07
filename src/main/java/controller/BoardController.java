@@ -37,9 +37,9 @@ public class BoardController {
 	@PUT
     @Path("assignboardtouser/{boardname}/{userName}")
     public String assignCardToUser
-    (@PathParam("boardname") String cardTitle , @PathParam("userName") String userName )
+    (@PathParam("boardname") String boardname , @PathParam("userName") String userName )
     {	
-    	return boardservice.assignboardtouser(cardTitle, userName);
+    	return boardservice.assignboardtouser(boardname, userName);
     }
 	@DELETE
     @Path("delete/{boardname}")
@@ -48,5 +48,11 @@ public class BoardController {
             @QueryParam("username") String username) {
         return boardservice.deleteboard(boardname, username);
     }
-	
+	@PUT
+    @Path("inviteuser/{boardname}/{userName}")
+	public String inviteuser
+    ( @PathParam("userName") String userName ,@PathParam("boardname") String boardname) {
+		return boardservice.inviteothers(userName,boardname );
+	}
+
 }

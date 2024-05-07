@@ -92,6 +92,8 @@ public class Boardservice {
         return "An error occurred during board deletion";
     }
     }
+    
+    
         
         public String assignboardtouser(String boardname ,String username ) {
         	try {
@@ -123,6 +125,43 @@ public class Boardservice {
         }
     
     
+        
+        
+        public String inviteothers(String username ,String boardname) {
+        	try {
+        		TypedQuery<User> query = entitymanager.createQuery(
+                    "SELECT u FROM User u WHERE u.username = :username",User.class);
+     	  query.setParameter("username", username);
+    	   List<User> users=query.getResultList();
+    	   if (users.isEmpty())
+           {
+               return "User not found with this name "+ username ;
+           }
+           
+           User usertoadd = users.get(0);
+           TypedQuery<Board> boardquery =entitymanager.createQuery("select b from Board b WHERE b.boardname = :boardname",Board.class);
+			boardquery.setParameter("boardname", boardname);
+			List<Board> boards=boardquery.getResultList();
+			if (boards.isEmpty())
+	           {
+	               return "board not found with this name "+ boardname ;
+	           }
+			Board board = boards.get(0);
+			if (board.getBoardUsers().contains(usertoadd)) {
+	            return "User " + username + " is already invited to the board " + boardname;
+	        }
+			 board.getBoardUsers().add(usertoadd);
+	           entitymanager.merge(board);
+	           return "user has invited to the board successfully";
+        	}
+        	
+        	catch (Exception e) 
+            {
+                e.printStackTrace();
+                return "An error occurred while assigning invite user";
+            }
+        	
+        }
 } 
    
   
