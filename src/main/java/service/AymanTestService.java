@@ -64,10 +64,10 @@ public class AymanTestService {
 	
 	@Transactional
     public String deleteList(int boardId, String type) {
-        try {
+		try {
             // Create a JPQL query to delete lists by board ID and type
             Query deleteQuery = entityManager.createQuery(
-                    "DELETE FROM AymanTestModel m WHERE m.board.boardid = :boardId AND m.type = :type");
+                "DELETE FROM AymanTestModel m WHERE m.board.boardid = :boardId AND m.type = :type");
             deleteQuery.setParameter("boardId", boardId);
             deleteQuery.setParameter("type", type);
 

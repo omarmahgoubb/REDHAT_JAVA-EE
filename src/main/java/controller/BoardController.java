@@ -41,5 +41,12 @@ public class BoardController {
     {	
     	return boardservice.assignboardtouser(cardTitle, userName);
     }
+	@DELETE
+    @Path("delete/{boardname}")
+    public String deleteBoard(
+            @PathParam("boardname") String boardname,
+            @QueryParam("username") String username) {
+        return boardservice.deleteboard(boardname, username);
+    }
 	
 }
