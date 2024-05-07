@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 
 import model.AymanTestModel;
 import model.Board;
+import model.Card;
 import model.User;
 
 @Stateful 
@@ -83,6 +84,42 @@ public class AymanTestService {
             return "An error occurred during list deletion: " + e.getMessage();
         }
     }
+	  public String assignlistToboard(String type, String boardname)
+	    {
+	        try 
+	        {
+	            // Find the card by its title
+	            TypedQuery<AymanTestModel> listsquery = entityManager.createQuery
+	            		("SELECT c FROM AymanTestModel c WHERE c.type = :type", AymanTestModel.class);
+	            listsquery.setParameter("type", type);
+	            List<AymanTestModel> lists = listsquery.getResultList();
+
+	            if (lists.isEmpty())
+	            {
+	                return "list not found with this name : " + type;
+	            }
+
+	            AymanTestModel list = lists.get(0);
+	            TypedQuery<Board> boardQuery = entityManager.createQuery
+	            		("SELECT u FROM Board u WHERE u.boardname = :boardname", Board.class);
+	            boardQuery.setParameter("boardname", boardname);
+	            List<Board> boards = boardQuery.getResultList();
+	            if (boards.isEmpty()) 
+	            {
+	                return "board not found with this name: " + boardname;
+	            }
+	            Board board = boards.get(0);
+	            
+	            board.getCardlist().add(list);
+	            entityManager.merge(board);
+
+	            return "list assigned to board successfully";
+	        } catch (Exception e) 
+	        {
+	            e.printStackTrace();
+	            return "An error occurred while assigning list to board";
+	        }
+	    }
 	
 		
 	}

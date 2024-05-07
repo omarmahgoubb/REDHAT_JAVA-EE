@@ -35,7 +35,7 @@ public class BoardController {
 	}	
 
 	@PUT
-    @Path("assign/{boardname}/{userName}")
+    @Path("assignboardtouser/{boardname}/{userName}")
     public String assignCardToUser
     (@PathParam("boardname") String cardTitle , @PathParam("userName") String userName )
     {	
