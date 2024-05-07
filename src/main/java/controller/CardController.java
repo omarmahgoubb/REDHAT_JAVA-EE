@@ -67,6 +67,16 @@ public class CardController
 	    {	
 	    	return cardService.assignCardToUser(cardTitle, userName);
 	    }
+	    
+	    
+	    @PUT
+	    @Path("assigncardtolist/{cardTitle}/{type}")
+	    public String assigncardtolist
+	    (@PathParam("cardTitle") String cardTitle , @PathParam("type") String type )
+	    {	
+	    	return cardService.assignCardTolist(cardTitle, type);
+	    }
+	   
 
 	
 

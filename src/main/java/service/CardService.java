@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import model.AymanTestModel;
 import model.Board;
 import model.Card;
 import model.User;
@@ -164,6 +165,46 @@ public class CardService {
             return "An error occurred while assigning card to user";
         }
     }
+    
+    public String assignCardTolist(String cardTitle, String type)
+    {
+        try 
+        {
+            // Find the card by its title
+            TypedQuery<Card> cardQuery = entityManager.createQuery
+            		("SELECT c FROM Card c WHERE c.title = :title", Card.class);
+            cardQuery.setParameter("title", cardTitle);
+            List<Card> cards = cardQuery.getResultList();
+
+            if (cards.isEmpty())
+            {
+                return "Card not found with title: " + cardTitle;
+            }
+
+            Card card = cards.get(0);
+            TypedQuery<AymanTestModel> userQuery = entityManager.createQuery
+            		("SELECT u FROM AymanTestModel u WHERE u.type = :type", AymanTestModel.class);
+            userQuery.setParameter("type", type);
+            List<AymanTestModel> lists = userQuery.getResultList();
+            if (lists.isEmpty()) 
+            {
+                return "list not found with username: " + type;
+            }
+            AymanTestModel list = lists.get(0);
+            
+            list.getCards().add(card);
+            entityManager.merge(card);
+
+            return "card assigned to list successfully";
+        } catch (Exception e) 
+        {
+            e.printStackTrace();
+            return "An error occurred while assigning list to card";
+        }
+    }
+    
+    }
+
 
     
     /////////////////////////////////////////////////////////////////
@@ -228,4 +269,3 @@ public class CardService {
     
     
     
-}
