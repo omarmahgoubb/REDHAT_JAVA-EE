@@ -34,6 +34,12 @@ public class BoardController {
 	    return boardservice.getBoards( id);
 	}	
 
-	
+	@PUT
+    @Path("assign/{boardname}/{userName}")
+    public String assignCardToUser
+    (@PathParam("boardname") String cardTitle , @PathParam("userName") String userName )
+    {	
+    	return boardservice.assignboardtouser(cardTitle, userName);
+    }
 	
 }

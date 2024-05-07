@@ -6,6 +6,7 @@ import controller.BoardController;
 import javax.ejb.Stateful;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import java.util.ArrayList;
@@ -90,10 +91,38 @@ public class Boardservice {
         e.printStackTrace(); // This is for demonstration, you may want to log it properly
         return "An error occurred during board deletion";
     }
-
+    }
+        
+        public String assignboardtouser(String boardname ,String username ) {
+        	try {
+        		TypedQuery<Board> boardquery =entitymanager.createQuery("select b from Board b WHERE b.boardname = :boardname",Board.class);
+        			boardquery.setParameter("boardname", boardname);
+        			List<Board> boards=boardquery.getResultList();
+        			if (boards.isEmpty()) {
+                        return "board not found with this name: " + boardname;
+        			
+        		}
+        			Board board = boards.get(0);
+        			  TypedQuery<User> userQuery = entitymanager.createQuery
+        	            		("SELECT u FROM User u WHERE u.username = :username", User.class);
+        	            userQuery.setParameter("username", username);
+        	            List<User> users = userQuery.getResultList();
+        	            if (users.isEmpty()) 
+        	            {
+        	                return "User not found with username: " + username;
+        	            }
+        	            User user = users.get(0);
+        	           board.getBoardUsers().add(user);
+        	           entitymanager.merge(board);
+        	           return "board assigned to user successfully";
+            } catch (Exception e) 
+            {
+                e.printStackTrace();
+                return "An error occurred while assigning board to user";
+            }
+        }
     
     
 } 
    
   
-}
