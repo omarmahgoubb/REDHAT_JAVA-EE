@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -27,6 +29,7 @@ public class Board
 
   
     @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
     @JoinTable(name="userxboard",
 	joinColumns=@JoinColumn(name="boardid"),
 	inverseJoinColumns=@JoinColumn(name="userid"))

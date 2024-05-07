@@ -60,7 +60,7 @@ public class Boardservice {
 	 
 		   
 	   TypedQuery<Board> query = entitymanager.createQuery(
-			    "SELECT b FROM Board b JOIN b.boardUsers u WHERE u.userid = :id", Board.class);
+			    "SELECT DISTINCT b FROM Board b JOIN b.boardUsers u WHERE u.userid = :id", Board.class);
 			query.setParameter("id", id);
 			return query.getResultList();
 
