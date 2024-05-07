@@ -69,29 +69,28 @@ public class Boardservice {
  
 
      
-    
-    public String deleteboard(String boardname , String username) 
-    {
-        try 
-        {
-    	TypedQuery<Board> query = entitymanager.createQuery("SELECT b FROM Board b WHERE b.boardname = :boardname", Board.class);
-        query.setParameter("boardname", boardname);
-        Board existingBoard = query.getSingleResult();
-        
-        if (existingBoard == null) 
-        {
-            return "Board not found";
-        }
-        
+   public String deleteboard(String boardname , String username) 
+   {
+       try 
+       {
+   	TypedQuery<Board> query = entitymanager.createQuery("SELECT b FROM Board b WHERE b.boardname = :boardname", Board.class);
+       query.setParameter("boardname", boardname);
+       Board existingBoard = query.getSingleResult();
+       
+       if (existingBoard == null) 
+       {
+           return "Board not found";
+       }
+       
 
-        entitymanager.remove(existingBoard);            
-        return "Board deleted successfully";
-    } catch (Exception e) 
-        {
-        e.printStackTrace(); // This is for demonstration, you may want to log it properly
-        return "An error occurred during board deletion";
-    }
-    }
+       entitymanager.remove(existingBoard);            
+       return "Board deleted successfully";
+   } catch (Exception e) 
+       {
+       e.printStackTrace(); // This is for demonstration, you may want to log it properly
+       return "An error occurred during board deletion";
+   }
+   }
     
     
         
@@ -148,7 +147,7 @@ public class Boardservice {
 	           }
 			Board board = boards.get(0);
 			if (board.getBoardUsers().contains(usertoadd)) {
-	            return "User " + username + " is already invited to the board " + boardname;
+	            return "User " + username + " is already at the board " + boardname;
 	        }
 			 board.getBoardUsers().add(usertoadd);
 	           entitymanager.merge(board);
@@ -162,6 +161,4 @@ public class Boardservice {
             }
         	
         }
-} 
-   
-  
+}

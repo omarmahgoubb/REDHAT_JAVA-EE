@@ -31,11 +31,7 @@ public class AymanTestControl {
     public String registerUser(AymanTestModel list) {
         return listservice.create_lists( list);
     }
-    @DELETE
-    @Path("lists/{boardId}/{type}")
-    public String deleteListsByBoardIdAndType(@PathParam("boardId") int boardId,@PathParam("type") String type) {
-        return listservice.deleteList(boardId, type);
-    }
+   
     @PUT
     @Path("assignlisttoboard/{boardname}/{listname}")
     public String assignCardToUser
@@ -43,4 +39,12 @@ public class AymanTestControl {
     {	
     	return listservice.assignlistToboard(listname, boardname);
     }
+   
+    @DELETE
+    @Path("deletelist/{listtype}/{boardid}")
+    public String deleteList(@PathParam("listtype") String listType, @PathParam("boardid") int boardId) {
+        return listservice.deleteList(listType, boardId);
+    }
+
+
 }

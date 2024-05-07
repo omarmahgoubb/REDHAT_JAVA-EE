@@ -61,29 +61,38 @@ public class AymanTestService {
 	           "done".equalsIgnoreCase(type);
 	}
 	
+	public String deleteList(String type, int boardId) {
+	    try {
+	        TypedQuery<AymanTestModel> listQuery = entityManager.createQuery(
+	                "SELECT l FROM AymanTestModel l WHERE l.type = :type", AymanTestModel.class);
+	        listQuery.setParameter("type", type);
+	        AymanTestModel list = listQuery.getSingleResult();
+	        
+	        if (list == null) {
+	            return "List not found with type: " + type;
+	        }
+
+	        Board board = entityManager.find(Board.class, boardId);
+	        
+	        if (board == null) {
+	            return "Board not found with ID: " + boardId;
+	        }
+	        
+	        // Remove the list from the board's list of lists
+	        board.getCardlist().remove(list);
+	        entityManager.merge(board);
+	        
+	        // Remove the list from the database
+	        entityManager.remove(list);
+	        
+	        return "List deleted successfully";
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return "An error occurred while deleting the list: " + e.getMessage();
+	    }
+	}
+
 	
-	@Transactional
-    public String deleteList(int boardId, String type) {
-		try {
-            // Create a JPQL query to delete lists by board ID and type
-            Query deleteQuery = entityManager.createQuery(
-                "DELETE FROM AymanTestModel m WHERE m.board.boardid = :boardId AND m.type = :type");
-            deleteQuery.setParameter("boardId", boardId);
-            deleteQuery.setParameter("type", type);
-
-            // Execute the delete operation
-            int deletedCount = deleteQuery.executeUpdate();
-
-            if (deletedCount > 0) {
-                return "Deleted " + deletedCount + " list(s) of type '" + type + "' for board ID " + boardId;
-            } else {
-                return "No lists of type '" + type + "' found for board ID " + boardId;
-            }
-        } catch (Exception e) {
-            e.printStackTrace(); // Log the exception properly
-            return "An error occurred during list deletion: " + e.getMessage();
-        }
-    }
 	  public String assignlistToboard(String type, String boardname)
 	    {
 	        try 
