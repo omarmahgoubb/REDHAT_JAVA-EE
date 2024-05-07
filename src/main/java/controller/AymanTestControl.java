@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateful;
 import javax.ws.rs.Consumes;
@@ -15,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 
 import model.AymanTestModel;
 import model.Board;
+import model.Card;
 import model.User;
 import service.AymanTestService;
 import service.UserService;
@@ -45,6 +48,11 @@ public class AymanTestControl {
     public String deleteList(@PathParam("listtype") String listType, @PathParam("boardid") int boardId) {
         return listservice.deleteList(listType, boardId);
     }
-
+    @GET
+    @Path("getlists")
+    public List<AymanTestModel> getlists() 
+	{
+        return listservice.getlist();
+    }
 
 }

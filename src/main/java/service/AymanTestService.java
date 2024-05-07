@@ -129,6 +129,13 @@ public class AymanTestService {
 	            return "An error occurred while assigning list to board";
 	        }
 	    }
+	  
+	  
+	  public List<AymanTestModel>getlist(){
+		  TypedQuery<AymanTestModel> query = entityManager.createQuery("SELECT c FROM AymanTestModel c", AymanTestModel.class);
+	        List<AymanTestModel> cards = query.getResultList();
+	        return cards;
+	  }
 	
 		
 	}
